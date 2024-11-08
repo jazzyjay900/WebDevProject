@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="movieListing.css">
+  <script defer src="movieListing.js" ></script>
+  <title>Library</title>
+</head>
+<body>
+  <div class="whole">
+    <div class="nav"></div>
+    <div class="secnav">
+      <ul>
+        <a href="movieListing.html"><li>All</li></a>
+        <a href="comedylist.html"><li>Comedy</li></a>
+        <a href="actionlist.html"><li>Action</li></a>
+        <a href="horror.html"><li>Horror</li></a>
+      </ul>
+    </div>
+    <div class="mian">
+      <div class="movieRow">
+        <div class="moviecard">
+          <img src="/Assets/Scary movie.jpg" class="thumbnail">
+          <h4 id="movie4title">Scary movie 5</h4>
+          <input type="number" placeholder="number of tickets" id="movie4ticket">
+          <button onclick=" cost('movie4title','movie4ticket',3)">add to cart</button>
+          <div class="movieinfo"></div>
+        </div>
+
+        <div class="moviecard">
+          <img src="/Assets/White girls.jpg" class="thumbnail">
+          <h4 id="movie7title">White girls</h4>
+          <input type="number" placeholder="number of tickets" id="movie7ticket">
+          <button onclick=" cost('movie7title','movie7ticket',6)">add to cart</button>
+          <div class="movieinfo"></div>
+        </div>
+
+        <div class="moviecard">
+          <img src="/Assets/badboys.jpg" class="thumbnail">
+          <h4 id="movie8title">Bad boys 4</h4>
+          <input type="number" placeholder="number of tickets" id="movie8ticket">
+          <button onclick=" cost('movie8title','movie8ticket',7)">add to cart</button>
+          <div class="movieinfo"></div>
+        </div>
+
+        <div class="moviecard">
+          <img src="/Assets/jackpot.jpg" class="thumbnail">
+          <h4 id="movie11title">Jackpot</h4>
+          <input type="number" placeholder="number of tickets" id="movie11ticket">
+          <button onclick=" cost('movie11title','movie11ticket',10)">add to cart</button>
+          <div class="movieinfo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
