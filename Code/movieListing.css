@@ -28,27 +28,22 @@ body{
 }
 h4{
   color: aliceblue;
-  margin-bottom: 0px;
+  margin-bottom: 3px;
   font-size: 10px;
 }
 
 .thumbnail{
-  height: 180px;
-  width: 160px;
+  height: 170px;
+  width: 150px;
   border-radius: 6px;
   transition: 0.3s;
 }
 
-.thumbnail:hover{
-  height: 200px;
-  width: 180px;
-  border-radius: 6px;
-}
 
-.movieRow{
+.movieCol{
   width: 25%;
-  padding: 5px 5px;
   display: flex;
+  float: left;
 }
 
 .moviecard{
@@ -64,4 +59,5 @@ button:hover{
 }
 input{
   width: 120px;
+  margin-bottom: 5px;
 }
