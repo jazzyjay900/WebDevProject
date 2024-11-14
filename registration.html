@@ -112,7 +112,7 @@
             <button type="submit" class="register-button">Register</button>
         </form>
     </div>
-    <script>
+     <script>
         function validateForm() {
             // Get form elements
             const username = document.getElementById("username");
@@ -158,6 +158,29 @@
                 confirmPasswordError.textContent = "Passwords do not match.";
                 confirmPasswordError.style.display = "block";
                 isValid = false;
+            }
+
+            if (isValid) {
+                // Get existing users from local storage or initialize an empty array
+                const users = JSON.parse(localStorage.getItem("users")) || [];
+
+                // Create a new user object
+                const newUser = {
+                    username: username.value,
+                    email: email.value,
+                    password: password.value // Store passwords securely in a real application
+                };
+
+                // Add new user to the users array
+                users.push(newUser);
+
+                // Save updated users array back to local storage
+                localStorage.setItem("users", JSON.stringify(users));
+
+                // Optional: Clear form fields after saving
+                username.value = email.value = password.value = confirmPassword.value = "";
+
+                alert("Registration successful!");
             }
 
             // Prevent form submission if validation fails
