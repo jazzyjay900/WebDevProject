@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website - Login</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        
+        body {
+            background-color: black;
+            color: white; 
+        }
+
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1c1c1c; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #f5f5f5;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            color: #f5f5f5;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+        }
+
+        
+        .login-button {
+            width: 48%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background-color: blue;
+        }
+
+        .cancel-button {
+            width: 48%;
+            padding: 10px;
+            background-color: #dc3545;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .cancel-button:hover {
+            background-color: #c82333;
+        }
+
+        a {
+            display: block;
+            color: blue;
+            margin-top: 10px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="loginForm" onsubmit="return validateLoginForm()">
+            <div class="form-group">
+                <label for="trn">TRN</label>
+                <input type="number" id="trn" name="trn" placeholder="Enter TRN">
+                <small id="trnError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter password">
+                <small id="loginPasswordError" class="error-message"></small>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <button type="button" class="cancel-button" onclick="resetLoginForm()">Cancel</button>
+            <a href="#" onclick="resetPassword()">Reset Password</a>
+        </form>
+    </div>
+    <script>
+        let loginAttempts = 0;
+
+        function validateLoginForm() {
+            const trn = document.getElementById("trn").value;
+            const password = document.getElementById("loginPassword").value;
+
+            const trnError = document.getElementById("trnError");
+            const loginPasswordError = document.getElementById("loginPasswordError");
+
+            trnError.style.display = loginPasswordError.style.display = "none";
+
+            const users = JSON.parse(localStorage.getItem("RegistrationData")) || [];
+
+            const user = users.find(user => user.trn === trn && user.password === password);
+
+            if (user) {
+                window.location.href = "product_catalog.html";
+                return false;
+            } else {
+                loginAttempts++;
+                if (loginAttempts >= 3) {
+                    window.location.href = "account_locked.html";
+                } else {
+                    trnError.textContent = "Invalid TRN or password.";
+                    trnError.style.display = "block";
+                    loginPasswordError.textContent = "Invalid TRN or password.";
+                    loginPasswordError.style.display = "block";
+                }
+                return false;
+            }
+        }
+
+        function resetLoginForm() {
+            document.getElementById("loginForm").reset();
+        }
+
+        function resetPassword() {
+            const trn = prompt("Please enter your TRN:");
+            const users = JSON.parse(localStorage.getItem("RegistrationData")) || [];
+            const user = users.find(user => user.trn === trn);
+
+            if (user) {
+                const newPassword = prompt("Please enter your new password:");
+                user.password = newPassword;
+                localStorage.setItem("RegistrationData", JSON.stringify(users));
+                alert("Password reset successful!");
+            } else {
+                alert("TRN not found.");
+            }
+        }
+    </script>
+</body>
+</html>
