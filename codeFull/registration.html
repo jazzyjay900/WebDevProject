@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website - Registration</title>
+    <script module  defer src="auth.js"></script>
+    
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body background color */
+        body {
+            background-color: black;
+            color: white; /* Default text color for readability on black background */
+        }
+
+        /* Container styling */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1c1c1c; /* Dark grey background for the form */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        /* Form styling */
+        h1 {
+            margin-bottom: 20px;
+            color: #f5f5f5;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            color: #f5f5f5;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Button styling */
+        .register-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .register-button:hover {
+            background-color: #218838;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register for (Name)</h1>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+                <small id="usernameError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter email">
+                <small id="emailError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+                <small id="passwordError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password">
+                <small id="confirmPasswordError" class="error-message"></small>
+            </div>
+            <button type="submit" class="register-button">Register</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            // Get form elements
+            const username = document.getElementById("username");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const confirmPassword = document.getElementById("confirmPassword");
+
+            // Error elements
+            const usernameError = document.getElementById("usernameError");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+            const confirmPasswordError = document.getElementById("confirmPasswordError");
+
+            // Reset errors
+            usernameError.style.display = emailError.style.display = passwordError.style.display = confirmPasswordError.style.display = "none";
+
+            let isValid = true;
+
+            // Validate username
+            if (username.value.trim() === "") {
+                usernameError.textContent = "Username is required.";
+                usernameError.style.display = "block";
+                isValid = false;
+            }
+
+            // Validate email
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!emailPattern.test(email.value)) {
+                emailError.textContent = "Please enter a valid email.";
+                emailError.style.display = "block";
+                isValid = false;
+            }
+
+            // Validate password
+            if (password.value.length < 6) {
+                passwordError.textContent = "Password must be at least 6 characters.";
+                passwordError.style.display = "block";
+                isValid = false;
+            }
+
+            // Validate confirm password
+            if (confirmPassword.value !== password.value) {
+                confirmPasswordError.textContent = "Passwords do not match.";
+                confirmPasswordError.style.display = "block";
+                isValid = false;
+            }
+
+            // Prevent form submission if validation fails
+            return isValid;
+        }
+    </script>
+</body>
+</html>
