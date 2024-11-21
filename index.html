@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Website - Login</title>
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -13,13 +12,11 @@
             font-family: Arial, sans-serif;
         }
 
-        
         body {
             background-color: black;
             color: white; 
         }
 
-        
         .container {
             width: 100%;
             max-width: 400px;
@@ -31,7 +28,6 @@
             text-align: center;
         }
 
-        
         h1 {
             margin-bottom: 20px;
             color: #f5f5f5;
@@ -60,7 +56,6 @@
             font-size: 14px;
         }
 
-        
         .login-button {
             width: 48%;
             padding: 10px;
@@ -143,7 +138,7 @@
 
             trnError.style.display = loginPasswordError.style.display = "none";
 
-            const users = JSON.parse(localStorage.getItem("RegistrationData")) || [];
+            const users = JSON.parse(localStorage.getItem("users")) || [];
 
             const user = users.find(user => user.trn === trn && user.password === password);
 
@@ -170,13 +165,13 @@
 
         function resetPassword() {
             const trn = prompt("Please enter your TRN:");
-            const users = JSON.parse(localStorage.getItem("RegistrationData")) || [];
+            const users = JSON.parse(localStorage.getItem("users")) || [];
             const user = users.find(user => user.trn === trn);
 
             if (user) {
                 const newPassword = prompt("Please enter your new password:");
                 user.password = newPassword;
-                localStorage.setItem("RegistrationData", JSON.stringify(users));
+                localStorage.setItem("users", JSON.stringify(users));
                 alert("Password reset successful!");
             } else {
                 alert("TRN not found.");
